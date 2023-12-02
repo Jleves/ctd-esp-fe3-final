@@ -7,7 +7,7 @@ export const reducer = (state, action ) =>{
             return {...state, favs:[...state.favs, action.payload]}
       
      case 'SET_THEME':
-        return {...state, theme:action.payload}
+        return {...state, theme: action.payload}
 
 
             

@@ -6,20 +6,23 @@ import Contact from "./Routes/Contact"
 import Favs from "./Routes/Favs"
 import Detail from "./Routes/Detail"
 import { Routes, Route } from "react-router-dom";
+import { useApiOdont } from "./Components/utils/global.context";
 
 
 
 function App() {
+const {state}= useApiOdont()
+const {theme} = state
   return (
-      <div>
-          <Navbar/>        
+      <div style={{background:theme.background}}>
+          <Navbar />        
           <Routes>
             <Route path="/" element= {<Home/>} />
             <Route path="/Contact" element={<Contact />}/>
             <Route path="/Detail/:id" element={<Detail />}/>
             <Route path="/Favs" element={<Favs />}/>
           </Routes>
-          <Footer/>
+          <Footer />
       </div>
   );
 }

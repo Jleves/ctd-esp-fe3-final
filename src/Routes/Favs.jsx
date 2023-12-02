@@ -7,15 +7,15 @@ import { useApiOdont } from "../Components/utils/global.context";
 const Favs = () => {
 
   const{state}= useApiOdont()
-  const{favs} = state
+  const{favs, theme} = state
 
   return (
-    <>
+    <div style={{background:theme.background}}>
       <h1>Dentistas Favoritos</h1>
       <div className="card-grid">
       {favs.map(item => <Card item={item} key={item.id}/>)}
       </div>
-    </>
+    </div>
   );
 };
 

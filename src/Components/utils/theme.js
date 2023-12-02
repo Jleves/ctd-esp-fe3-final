@@ -1,9 +1,10 @@
-export const dark = {
-    backgroundColor: "#12121296",
-    color: "white"
+export const themes = {
+  light: {
+  font: 'black',
+  background: 'white'
+  },
+  dark: {
+  font: 'white',
+  background: 'black'
   }
-
-export const light= {
-    font: 'black',
-    background: 'white'
-    }
+  };

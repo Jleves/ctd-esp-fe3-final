@@ -1,23 +1,28 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from 'axios'
 import {reducer} from '../../Reducers/reducer'
-import {dark, light} from '../utils/theme'
+import {themes} from '../utils/theme'
 
  
 
   const ContextGlobal = createContext();
 
   
-  const initialState = {theme: light, info: [], favs: JSON.parse(localStorage.getItem('favs'))|| []}
+  const initialState = {theme: themes.light, info: [], favs: JSON.parse(localStorage.getItem('favs'))|| []}
   
 
  const ContextProvider = ({ children }) => {
   
   const [state , dispatch] = useReducer(reducer , initialState)
-  console.log("context", state)
+  
     
  
-  const changeTheme = (value)=> {dispatch({type: 'SET_THEME', payload: {value}})}
+  const handleChangeTheme = () => {
+    if (state.theme === themes.dark) {dispatch({type: 'SET_THEME', payload: themes.light}), console.log("cambio a ligth")}
+    if (state.theme === themes.light) {dispatch({type: 'SET_THEME', payload: themes.dark}), console.log("cambio a dark")}
+  }
+
+ 
  
   const url  = "https://jsonplaceholder.typicode.com/users"
  
@@ -39,7 +44,7 @@ import {dark, light} from '../utils/theme'
   
 
   return (
-    <ContextGlobal.Provider value={{state, dispatch, changeTheme}}>
+    <ContextGlobal.Provider value={{state, dispatch, handleChangeTheme}}>
       {children}
     </ContextGlobal.Provider>
   );

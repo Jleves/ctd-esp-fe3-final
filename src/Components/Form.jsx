@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import './../index.css'
+import { useApiOdont } from "./utils/global.context";
 
 
 
-const Form = () => {
+const Form = ({theme}) => {
   //Aqui deberan implementar el form completo con sus validaciones
 
   const[data, setData]= useState(
@@ -12,6 +13,7 @@ const Form = () => {
       email : ''
     }
   )
+ 
 
   const [show, setShow] = useState(false)
   const[error,setError]=useState(false)
@@ -29,16 +31,16 @@ const Form = () => {
         }}
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="Form-cont">
+      <form onSubmit={handleSubmit} >
         <input type="text" value={data.nombre} onChange={(e)=>{setData({...data, nombre: e.target.value})}}/>
-        <label htmlFor="">Nombre Completo</label>
+        <label >Nombre Completo</label>
         <input type="text" value={data.email} onChange={(e)=>{setData({...data, email: e.target.value})}} />
-        <label htmlFor="">Email</label>
+        <label >Email</label>
         <button >Enviar</button>
       </form>
       { show &&
-      <h1>Gracias {data.nombre} en la brevedad estaremos comunicandonos al email {data.email}</h1>}
+      <h2>Gracias {data.nombre} en la brevedad estaremos comunicandonos al email {data.email}</h2>}
       {error && <h2>Por favor ingrese los datos correctamente</h2>}
     </div>
   );
