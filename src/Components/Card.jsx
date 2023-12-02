@@ -1,27 +1,36 @@
 import React from "react";
+import card from '../index.css'
+import { useApiOdont } from "./utils/global.context";
+import { Link } from "react-router-dom";
 
 
 const Card = ({item}) => {
 
-  const {id, name, userName} = item
+  const {name, username} = item
 
-  console.log("Informacion en CARD " + item)
+  const {state, dispatch} = useApiOdont()
+
+  const{favs} = state
+
+  const findFavs = favs.find((fav) => fav.id == item.id)
 
   const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
+    if(findFavs){
+      alert('Ya existe el dentista en favoritos')
+    } else {
+    dispatch({type:'ADD_FAV', payload:item})}
   }
 
   return (
-    <div className="card">
+    <div className={card}>
 
-      <h2>{name}</h2>
-      <h3>{userName}</h3>
-        {/* En cada card deberan mostrar en name - username y el id */}
+      <h1>{name}</h1>
+      <Link to={'/Detail/'+ item.id}>
+      <img src="./../../public/images/doctor.jpg" alt="" />
+      </Link>
+      <h2>{username}</h2>
 
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav</button>
+      <button onClick={addFav} className="favButton">Add fav</button>
     </div>
   );
 };
